@@ -4,23 +4,22 @@
  * split_string_by_delimiters - function that splits a string into
  * words using delimiters
  * @input_str: the input string to be analyzed
- * @delimiter_str: the delimiter string
+ * @delim_str: the delimiter string
  * Return: a pointer to an array of strings, or NULL on failure
  */
 
-char **split_string_by_delimiters(char *input_str, char *delimiter_str)
+char **split_string_by_delimiters(char *input_str, char *delim_str)
 {
 	int i, j, k, m, num_words = 0;
 	char **word_array;
 
 	if (input_str == NULL || input_str[0] == 0)
 		return (NULL);
-	if (!delimiter_str)
-		delimiter_str = " ";
+	if (!delim_str)
+		delim_str = " ";
 	for (i = 0; input_str[i] != '\0'; i++)
 	{
-		if (!is_delimiter(input_str[i], delimiter_str) &&
-				(is_delimiter(input_str[i + 1], delimiter_str) || !input_str[i + 1]))
+		if (!is_delim(input_str[i], delim_str) && (is_delim(input_str[i + 1], delim_str) || !input_str[i + 1]))
 		{
 			num_words++;
 		}
@@ -32,10 +31,10 @@ char **split_string_by_delimiters(char *input_str, char *delimiter_str)
 		return (NULL);
 	for (i = 0, j = 0; j < num_words; j++)
 	{
-		while (is_delimiter(input_str[i], delimiter_str))
+		while (is_delim(input_str[i], delim_str))
 			i++;
 		k = 0;
-		while (!is_delimiter(input_str[i + k], delimiter_str) && input_str[i + k])
+		while (!is_delim(input_str[i + k], delim_str) && input_str[i + k])
 			k++;
 		word_array[j] = malloc((k + 1) * sizeof(char));
 		if (!word_array[j])
@@ -57,11 +56,11 @@ char **split_string_by_delimiters(char *input_str, char *delimiter_str)
  * split_string_by_single_delimiter - function that splits a string into
  * words using a single delimiter
  * @input_str: the input string to analyze
- * @delimiter: the delimiter character
+ * @delim: the delimiter character
  * Return: a pointer to an array of strings, or NULL on failure
  */
 
-char **split_string_by_single_delimiter(char *input_str, char delimiter)
+char **split_string_by_single_delimiter(char *input_str, char delim)
 {
 	int i, j, k, m, num_words = 0;
 	char **word_array;
@@ -70,9 +69,8 @@ char **split_string_by_single_delimiter(char *input_str, char delimiter)
 		return (NULL);
 	for (i = 0; input_str[i] != '\0'; i++)
 	{
-		if ((input_str[i] != delimiter && input_str[i + 1] == delimiter) ||
-				(input_str[i] != delimiter && !input_str[i + 1]) ||
-				input_str[i + 1] == delimiter)
+		if ((input_str[i] != delim && input_str[i + 1] == delim) ||
+				(input_str[i] != delim && !input_str[i + 1]) || input_str[i + 1] == delim)
 		{
 			num_words++;
 		}
@@ -84,11 +82,11 @@ char **split_string_by_single_delimiter(char *input_str, char delimiter)
 		return (NULL);
 	for (i = 0, j = 0; j < num_words; j++)
 	{
-		while (input_str[i] == delimiter && input_str[i] != delimiter)
+		while (input_str[i] == delim && input_str[i] != delim)
 			i++;
 		k = 0;
-		while (input_str[i + k] != delimiter && input_str[i + k] &&
-				input_str[i + k] != delimiter)
+		while (input_str[i + k] != delim && input_str[i + k] &&
+				input_str[i + k] != delim)
 			k++;
 		word_array[j] = malloc((k + 1) * sizeof(char));
 		if (!word_array[j])

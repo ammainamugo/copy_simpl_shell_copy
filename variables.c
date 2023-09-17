@@ -52,7 +52,8 @@ int is_chain_delimiter(info_t *info, char *buffer, size_t *position)
  * Return: Void
  */
 
-void check_chain_continue(info_t *info, char *buffer, size_t *position, size_t start_position, size_t length)
+void check_chain_continue(info_t *info, char *buffer,
+		size_t *position, size_t start_position, size_t length)
 {
 	size_t current_pos = *position;
 
@@ -77,7 +78,7 @@ void check_chain_continue(info_t *info, char *buffer, size_t *position, size_t s
 }
 
 /**
- * replace_alias - function that replaces aliases in the tokenized string
+ * replace_aliases - function that replaces aliases in the tokenized string
  * @info: pointer to the parameter structure
  *
  * Return: 1 if replaced, 0 otherwise
