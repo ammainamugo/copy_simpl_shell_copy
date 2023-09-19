@@ -11,5 +11,6 @@ int pr_error(char c);
 int wri_fd(char c, int fd);
 int atoi_er(char *st);
 void perr_msg(info_type *inf, char *est);
+int handle_d(int in, int fd);
 
 #endif
