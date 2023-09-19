@@ -6,5 +6,8 @@ int find_delim(char ch, char *d);
 int find_alpha(int ch);
 
 void p_string(char *s);
+int pfd_string(char *s, int fd);
+int pr_error(char c);
+int wri_fd(char c, int fd);
 
 #endif
