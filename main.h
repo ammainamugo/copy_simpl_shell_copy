@@ -9,5 +9,7 @@ void p_string(char *s);
 int pfd_string(char *s, int fd);
 int pr_error(char c);
 int wri_fd(char c, int fd);
+int atoi_er(char *st);
+void perr_msg(info_type *inf, char *est);
 
 #endif
