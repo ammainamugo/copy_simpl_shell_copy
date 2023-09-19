@@ -12,5 +12,7 @@ int wri_fd(char c, int fd);
 int atoi_er(char *st);
 void perr_msg(info_type *inf, char *est);
 int handle_d(int in, int fd);
+char *_itoa(long int nu, int ba, int fl);
+void comment_rm(char *buff);
 
 #endif
