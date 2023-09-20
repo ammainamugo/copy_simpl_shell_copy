@@ -1,6 +1,83 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <limits.h>
+#include <fcntl.h>
+#include <errno.h>
+
+
+/* _atoi.c */
+int is_delimiter(char ch, char *delim);
+int _isalphabetic(int ch);
+int _atoi(char *s);
+
+/* builtins.c */
+int _shellexit(info_t *info);
+int _change_directory(info_t *info);
+int _shellhelp(info_t *info);
+
+/* builtins_2.c */
+int display_command_history(info_t *info);
+int remove_alias(info_t *info, char *alias_string);
+int add_alias(info_t *info, char *alias_string);
+int print_single_alias(alias_t *alias_node);
+int manage_aliases(info_t *info);
+
+/* environment_var.c */
+int display_environment(info_t *info);
+char *get_environment_variable(info_t *info, const char *name);
+int set_environment_variable(info_t *info);
+int unset_environment_variable(info_t *info);
+int populate_environment_list(info_t *info);
+
+/* string_handling.c */
+int string_length(char *str);
+int string_compare(char *str1, char *str2);
+char *string_starts_with(const char *haystack, const char *needle);
+char *string_concatenate(char *destination, char *source);
+
+/* string_handling2.c */
+char *string_copy(char *destination, char *source);
+char *string_duplicate(const char *str_to_duplicate);
+void print_string(char *str_to_print);
+int write_character(char character);
+
+/* token_generator.c */
+char **split_string_by_delimiters(char *input_str, char *delim_str);
+char **split_string_by_single_delimiter(char *input_str, char delim);
+
+/* variables.c */
+int is_chain_delimiter(info_t *info, char *buffer, size_t *position);
+void check_chain_continue(info_t *info, char *buffer,
+		size_t *position, size_t start_position, size_t length);
+int replace_aliases(info_t *info);
+int replace_variables(info_t *info);
+int replace_string(char **old_str, char *new_str);
+
+/* main.c */
+int main(int argc, char **argv);
+
+/* ptr_memory.c */
+int freeAndNullPointer(void **ptr);
+
+/* path_parser.c */
+int isExecutableCommand(info_t *info, char *path);
+char *duplicateSubstring(char *pathstr, int start, int stop);
+char *findExecutableInPath(info_t *info, char *pathstr, char *cmd);
+
+/* shell_loop.c */
+int shellMainLoop(info_t *info, char **av);
+int findBuiltinCommand(info_t *info);
+void findExecutableCommand(info_t *info);
+void forkAndExecuteCommand(info_t *info);
+
 void p_string(char *s);
 int pfd_string(char *s, int fd);
 int pr_error(char c);
