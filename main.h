@@ -21,5 +21,8 @@ ttype_size buff_read(type_info *inf, char *buff, size_t *s);
 int nextline(type_info *inf, char **pt, type_size *l);
 ttype_size typ_in(type_info *inf);
 void block_ctc(__attribute__((unused))int num);
+void startinfo(type_info *info);
+void initinfo(type_info *inf, char **av);
+void resetinfo(type_info *inf, int f);
 
 #endif
