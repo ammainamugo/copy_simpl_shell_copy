@@ -116,6 +116,8 @@ char **list_str(type_list *h);
 type_size pr_list(const type_list *h);
 type_list *node_starts_with(type_list *n, char *pre, char ch);
 ttype_size node_index(type_list *h, type_list *n);
-
+char *mem_byte(char *st, char byte, unsigned int n);
+void free_str(char **p_st);
+void *re_alloc(void *ptr, unsigned int size, unsigned int size_new);
 
 #endif
