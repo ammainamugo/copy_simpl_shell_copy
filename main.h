@@ -56,7 +56,7 @@ char **split_string_by_single_delimiter(char *input_str, char delim);
 /* variables.c */
 int is_chain_delimiter(info_t *info, char *buffer, size_t *position);
 void check_chain_continue(info_t *info, char *buffer,
-		size_t *position, size_t start_position, size_t length);
+size_t *position, size_t start_position, size_t length);
 int replace_aliases(info_t *info);
 int replace_variables(info_t *info);
 int replace_string(char **old_str, char *new_str);
@@ -111,5 +111,11 @@ type_list *nodeadd_end(type_list **h, const char *s, int num);
 type_size p_list_str(const type_list *h);
 int node_delete(type_list **h, unsigned int ind);
 void listfree(type_list **head_p);
+type_size lenlist(const type_list *h);
+char **list_str(type_list *h);
+type_size pr_list(const type_list *h);
+type_list *node_starts_with(type_list *n, char *pre, char ch);
+ttype_size node_index(type_list *h, type_list *n);
+
 
 #endif
