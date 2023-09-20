@@ -14,5 +14,11 @@ void perr_msg(info_type *inf, char *est);
 int handle_d(int in, int fd);
 char *_itoa(long int nu, int ba, int fl);
 void comment_rm(char *buff);
+char *stcat(char *dest, char *src, int byte);
+char *stcpy(char *dest, char *src, int total);
+char *loc_chr(char *str, char ch);
+char **fin_env(type_info *inf);
+int reset_env(type_info *inf, char *v);
+int set_env(type_info *inf, char *v, char *value);
 
 #endif
