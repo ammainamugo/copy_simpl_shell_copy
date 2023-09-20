@@ -68,7 +68,6 @@ char *loc_chr(char *str, char ch)
 	do {
 		if (*str == ch)
 			return (str);
-	}
-	while (*str++ != '\0');
+	} while (*str++ != '\0');
 	return (NULL);
 }

@@ -28,8 +28,7 @@ char *_itoa(long int nu, int ba, int fl)
 	do	{
 		*--p = ar[n % ba];
 		n /= ba;
-	}
-	while (n != 0);
+	} while (n != 0);
 
 	if (si)
 		*--p = si;
