@@ -19,7 +19,8 @@ char **split_string_by_delimiters(char *input_str, char *delim_str)
 		delim_str = " ";
 	for (i = 0; input_str[i] != '\0'; i++)
 	{
-		if (!is_delim(input_str[i], delim_str) && (is_delim(input_str[i + 1], delim_str) || !input_str[i + 1]))
+		if (!is_delim(input_str[i], delim_str) && (is_delim(input_str[i + 1],
+						delim_str) || !input_str[i + 1]))
 		{
 			num_words++;
 		}

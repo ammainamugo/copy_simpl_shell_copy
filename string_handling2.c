@@ -5,7 +5,6 @@
  * destination string
  * @destination: the destination string
  * @source: the source string
- *
  * Return: pointer to the destination string
  */
 
@@ -27,7 +26,6 @@ char *string_copy(char *destination, char *source)
 /**
  * string_duplicate - function that duplicates a string
  * @str_to_duplicate: the string to duplicate
- *
  * Return: pointer to the duplicated string
  */
 
@@ -35,6 +33,7 @@ char *string_duplicate(const char *str_to_duplicate)
 {
 	int length = 0;
 	char *duplicate_str;
+
 	if (str_to_duplicate == NULL)
 		return (NULL);
 	while (*str_to_duplicate++)
@@ -49,7 +48,6 @@ char *string_duplicate(const char *str_to_duplicate)
 /**
  * print_string - function that prints an input string
  * @str_to_print: the string to print
- *
  * Return: Null
  */
 
@@ -70,7 +68,6 @@ void print_string(char *str_to_print)
  * write_character - function that writes a character to the
  * standard output
  * @character: The character to print
- *
  * Return: On success 1.
  * On error, -1 is returned, and error no is set appropriately
  */
@@ -79,6 +76,7 @@ int write_character(char character)
 {
 	static int buffer_index;
 	static char write_buffer[WRITE_BUFFER_SIZE];
+
 	if (character == FLUSH_BUFFER || buffer_index >= WRITE_BUFFER_SIZE)
 	{
 		write(1, write_buffer, buffer_index);

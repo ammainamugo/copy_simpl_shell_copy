@@ -4,7 +4,7 @@
  * startinfo - initializes typeinfo struct
  * @inf: struct address
  */
-void setinfo(type_info *info)
+void startinfo(type_info *inf)
 {
 	inf->arg = NULL;
 	inf->argv = NULL;
