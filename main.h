@@ -24,5 +24,15 @@ void block_ctc(__attribute__((unused))int num);
 void startinfo(type_info *info);
 void initinfo(type_info *inf, char **av);
 void resetinfo(type_info *inf, int f);
+char *hist_file(type_info *inf);
+int hist_write(type_info *inf);
+int hist_read(type_info *inf);
+int history_build(type_info *inf, char *buff, int lcount);
+int hist_renum(type_info *inf);
+type_list *node_add(type_list **h, const char *s, int num);
+type_list *nodeadd_end(type_list **h, const char *s, int num);
+type_size p_list_str(const type_list *h);
+int node_delete(type_list **h, unsigned int ind);
+void listfree(type_list **head_p);
 
 #endif
