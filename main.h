@@ -50,7 +50,7 @@ void print_string(char *str_to_print);
 int write_character(char character);
 
 /* token_generator.c */
-char **split_string_by_delimiters(char *input_str, char *delim_str);
+char **split_string_by_delimiters(char *str, char *d);
 char **split_string_by_single_delimiter(char *input_str, char delim);
 
 /* variables.c */
