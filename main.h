@@ -120,4 +120,97 @@ char *mem_byte(char *st, char byte, unsigned int n);
 void free_str(char **p_st);
 void *re_alloc(void *ptr, unsigned int size, unsigned int size_new);
 
+#define READ_BUF_SIZE 1024
+#define WRITE_BUF_SIZE 1024
+#define BUF_FLUSH -1
+
+#define CMD_NORM	0
+#define CMD_OR		1
+#define CMD_AND		2
+#define CMD_CHAIN	3
+
+#define CONVERT_LOWERCASE	1
+#define CONVERT_UNSIGNED	2
+
+#define USE_GETLINE 0
+#define USE_STRTOK 0
+
+#define HIST_FILE	".simple_shell_history"
+#define HIST_MAX	4096
+
+extern char **envi;
+
+/**
+ * struct stlist - singly linked list
+ * @num: the number field
+ * @str: a string
+ * @next: points to the next node
+ */
+typedef struct stlist
+{
+	int n;
+	char *s;
+	struct stlist *next;
+} type_list;
+
+/**
+ * struct infopas - contains pseudo-arguements to pass into a function
+ * @arg: string generated from getline containing arguements
+ * @argv:an array of strings generated from arg
+ * @path: a string path for the current command
+ * @argc: the argument count
+ * @counterr: the error count
+ * @num_err: error code for exit()s
+ * @count_flag: if on count this line of input
+ * @f_name: the program filename
+ * @env: linked list local copy of environ
+ * @envi: custom modified copy of environ from LL env
+ * @nhistory: the history node
+ * @lias: alias node
+ * @ch_env: on if environ changed
+ * @status: return status of last exec'd command
+ * @bf_cmd: address of pointer to bf_cmd
+ * @bf_cmdtype: CMD_type ||, &&, ;
+ * @readfd: the fd from which to read line input
+ * @cnt_hist: history line number count
+ */
+typedef struct infopas
+{
+	char *arg;
+	char **argv;
+	char *path;
+	int argc;
+	unsigned int counterr;
+	int num_err;
+	int count_flag;
+	char *fname;
+	list_t *env;
+	list_t *nhistory;
+	list_t *lias;
+	char **envi;
+	int ch_env;
+	int status;
+
+	char **bf_cmd;
+	int bf_cmdtype;
+	int readfd;
+	int cnt_hist;
+} type_info;
+
+#define INFO_INIT \
+{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+		0, 0, 0}
+
+/**
+ * struct builtin - contains a builtin string and related function
+ * @type: the builtin command flag
+ * @func: the function
+ */
+typedef struct builtin
+{
+	char *type;
+	int (*func)(info_t *);
+} builtin_table;
+
+
 #endif
