@@ -75,4 +75,27 @@ Implement the builtin command cd:
 * You have to handle the command cd -
 * You have to update the environment variable PWD when you change directory
 
-
+2list.c
+environment_var.c
+main.h
+path_parser.c
+string_handling2.c
+atoi.c
+handle_error.c
+mani_history.c
+ptr_memory.c
+string_handling.c
+builtins_2.c
+handle_input1.c
+mani_info.c
+read_input.c
+string_mani.c
+builtins.c
+handle_input2.c
+mani_list.c
+token_generator.c
+env_func.c
+main.c
+mem.h
+shell_loop.c
+variables.c
