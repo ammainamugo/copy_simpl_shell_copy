@@ -65,24 +65,24 @@ void print_string(char *str_to_print)
 }
 
 /**
- * write_character - function that writes a character to the
- * standard output
+ * write_character - function that writes a character to the standard output
  * @character: The character to print
  * Return: On success 1.
  * On error, -1 is returned, and error no is set appropriately
  */
-
 int write_character(char character)
 {
-	static int buffer_index;
-	static char write_buffer[WRITE_BUFFER_SIZE];
+static int buffer_index;
+static char write_buffer[WRITE_BUFFER_SIZE];
 
-	if (character == FLUSH_BUFFER || buffer_index >= WRITE_BUFFER_SIZE)
-	{
-		write(1, write_buffer, buffer_index);
-		buffer_index = 0;
-	}
-	if (character != FLUSH_BUFFER)
-		write_buffer[buffer_index++] = character;
+if (character == FLUSH_BUFFER || buffer_index >= WRITE_BUFFER_SIZE)
+{
+	write(1, write_buffer, buffer_index);
+	buffer_index = 0;
+}
+if (character != FLUSH_BUFFER)
+{
+	write_buffer[buffer_index++] = character;
 	return (1);
+}
 }
