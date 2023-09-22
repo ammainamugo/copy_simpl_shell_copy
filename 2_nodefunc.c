@@ -14,6 +14,7 @@ type_list *node_add(type_list **h, const char *s, int n)
 	if (!h)
 		return (NULL);
 	type_list h_new = malloc(sizeof(type_list));
+
 	if (!h_new)
 		return (NULL);
 	set_mem((void *)h_new, 0, sizeof(type_list));

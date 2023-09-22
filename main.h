@@ -66,9 +66,6 @@ int replace_string(char **old_str, char *new_str);
 /* main.c */
 int main(int argc, char **argv);
 
-/* ptr_memory.c */
-int freeAndNullPointer(void **ptr);
-
 /* path_parser.c */
 int isExecutableCommand(info_t *info, char *path);
 char *duplicateSubstring(char *pathstr, int start, int stop);
@@ -108,9 +105,12 @@ int hist_write(type_info *inf);
 int hist_read(type_info *inf);
 int history_build(type_info *inf, char *buff, int lcount);
 int hist_renum(type_info *inf);
-char *mem_byte(char *st, char byte, unsigned int n);
+
+/* memory functions */
+char *set_mem(char *p, char byte, unsigned int b);
 void free_str(char **p_st);
-void *re_alloc(void *ptr, unsigned int size, unsigned int size_new);
+int free_p(void **p);
+void *re_alloc(void *p, unsigned int size, unsigned int size_new);
 
 /* lists functions */
 type_size p_list_str(const type_list *h);
