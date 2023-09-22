@@ -108,19 +108,22 @@ int hist_write(type_info *inf);
 int hist_read(type_info *inf);
 int history_build(type_info *inf, char *buff, int lcount);
 int hist_renum(type_info *inf);
-type_list *node_add(type_list **h, const char *s, int num);
-type_list *nodeadd_end(type_list **h, const char *s, int num);
-type_size p_list_str(const type_list *h);
-int node_delete(type_list **h, unsigned int ind);
-void listfree(type_list **head_p);
-type_size lenlist(const type_list *h);
-char **list_str(type_list *h);
-type_size pr_list(const type_list *h);
-type_list *node_starts_with(type_list *n, char *pre, char ch);
-ttype_size node_index(type_list *h, type_list *n);
 char *mem_byte(char *st, char byte, unsigned int n);
 void free_str(char **p_st);
 void *re_alloc(void *ptr, unsigned int size, unsigned int size_new);
+
+/* lists functions */
+type_size p_list_str(const type_list *h);
+type_size lenlist(const type_list *h);
+type_size pr_list(const type_list *h);
+char **list_str(type_list *h);
+void listfree(type_list **head_p);
+
+type_list *node_add(type_list **h, const char *s, int num);
+type_list *nodeadd_end(type_list **h, const char *s, int num);
+int node_delete(type_list **h, unsigned int ind);
+type_list *start_node(type_list *n, char *pre, char ch);
+ttype_size node_index(type_list *h, type_list *n);
 
 #define READ_BUF_SIZE 1024
 #define WRITE_BUF_SIZE 1024
@@ -186,9 +189,9 @@ typedef struct infopas
 	int num_err;
 	int count_flag;
 	char *f_name;
-	list_t *env;
-	list_t *nhistory;
-	list_t *lias;
+	type_list *env;
+	type_list *nhistory;
+	type_list *lias;
 	char **envi;
 	int ch_env;
 	int status;
