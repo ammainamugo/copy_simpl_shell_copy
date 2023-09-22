@@ -24,17 +24,17 @@ void resetinfo(type_info *inf, int f)
 	inf->path = NULL;
 	if (f)
 	{
-		if (!inf->bf_cmdtype)
+		if (!inf->bf_cmd)
 			free(inf->arg);
 		if (inf->env)
 			fr_list(&(inf->env));
 		if (inf->history)
 			fr_list(&(inf->history));
 		if (inf->alias)
-			fr_list(&(inf->alias));
-		free_str(inf->environ);
-			inf->environ = NULL;
-		bfree((void **)inf->bf_cmdtype);
+			fr_list(&(inf->lias));
+		free_str(inf->envi);
+			inf->envi = NULL;
+		free_p((void **)inf->bf_cmd);
 		if (inf->readfd > 2)
 			close(inf->readfd);
 		print_out(BUFF_FLUSH);
@@ -48,26 +48,26 @@ void resetinfo(type_info *inf, int f)
  */
 void initinfo(type_info *inf, char **av)
 {
-	int i = 0;
+	int a = 0;
 
-	inf->fname = av[0];
+	inf->f_name = av[0];
 	if (inf->arg)
 	{
-		inf->argv = strtow(inf->arg, " \t");
+		inf->argv = split_str(inf->arg, "\t");
 		if (!inf->argv)
 		{
 			inf->argv = malloc(sizeof(char *) * 2);
 			if (inf->argv)
 			{
-				inf->argv[0] = _strdup(inf->arg);
+				inf->argv[0] = dup_s(inf->arg);
 				inf->argv[1] = NULL;
 			}
 		}
-		for (i = 0; inf->argv && inf->argv[i]; i++)
+		for (a = 0; inf->argv && inf->argv[a]; a++)
 			;
-		inf->argc = i;
+		inf->argc = a;
 
-		replace_alias(inf);
-		replace_vars(inf);
+		alias_rep(inf);
+		vars_rep(inf);
 	}
 }

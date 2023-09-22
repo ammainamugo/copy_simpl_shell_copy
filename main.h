@@ -97,6 +97,8 @@ ttype_size buff_read(type_info *inf, char *buff, size_t *s);
 int nextline(type_info *inf, char **pt, type_size *l);
 ttype_size typ_in(type_info *inf);
 void block_ctc(__attribute__((unused))int num);
+
+/* info functions */
 void startinfo(type_info *info);
 void initinfo(type_info *inf, char **av);
 void resetinfo(type_info *inf, int f);
@@ -129,7 +131,7 @@ ttype_size node_index(type_list *h, type_list *n);
 
 #define READ_BUF_SIZE 1024
 #define WRITE_BUF_SIZE 1024
-#define BUF_FLUSH -1
+#define BUFF_FLUSH -1
 
 #define CMD_NORM	0
 #define CMD_OR		1
