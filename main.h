@@ -212,5 +212,4 @@ typedef struct builtin
 	int (*func)(info_t *);
 } builtin_table;
 
-
 #endif
