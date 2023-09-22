@@ -144,8 +144,8 @@ extern char **envi;
 
 /**
  * struct stlist - singly linked list
- * @num: the number field
- * @str: a string
+ * @n: the number field
+ * @s: a string
  * @next: points to the next node
  */
 typedef struct stlist
@@ -185,7 +185,7 @@ typedef struct infopas
 	unsigned int counterr;
 	int num_err;
 	int count_flag;
-	char *fname;
+	char *f_name;
 	list_t *env;
 	list_t *nhistory;
 	list_t *lias;
@@ -211,7 +211,7 @@ typedef struct infopas
 typedef struct builtin
 {
 	char *type;
-	int (*func)(info_t *);
+	int (*func)(type_info *);
 } builtin_table;
 
 #endif
