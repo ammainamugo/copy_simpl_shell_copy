@@ -1,56 +1,52 @@
 #include "main.h"
 
 /**
- * split_string_by_delimiters - function that splits a string into
- * words using delimiters
- * @input_str: the input string to be analyzed
- * @delim_str: the delimiter string
+ * **split_string_by_delimiters - function that splits a string into words
+ * Repeat delimiters are ignored
+ * @str: the input string
+ * @d: the delimeter string
  * Return: a pointer to an array of strings, or NULL on failure
  */
 
-char **split_string_by_delimiters(char *input_str, char *delim_str)
+char **split_string_by_delimiters(char *str, char *d)
 {
-	int i, j, k, m, num_words = 0;
-	char **word_array;
+	int i, j, k, m, numwords = 0;
+	char **s;
 
-	if (input_str == NULL || input_str[0] == 0)
+	if (str == NULL || str[0] == 0)
 		return (NULL);
-	if (!delim_str)
-		delim_str = " ";
-	for (i = 0; input_str[i] != '\0'; i++)
+	if (!d)
+		d = " ";
+	for (i = 0; str[i] != '\0'; i++)
+		if (!is_delim(str[i], d) && (is_delim(str[i + 1], d) || !str[i + 1]))
+			numwords++;
+
+	if (numwords == 0)
+		return (NULL);
+	s = malloc((1 + numwords) * sizeof(char *));
+	if (!s)
+		return (NULL);
+	for (i = 0, j = 0; j < numwords; j++)
 	{
-		if (!is_delim(input_str[i], delim_str) && (is_delim(input_str[i + 1],
-						delim_str) || !input_str[i + 1]))
-		{
-			num_words++;
-		}
-	}
-	if (num_words == 0)
-		return (NULL);
-	word_array = malloc((1 + num_words) * sizeof(char *));
-	if (!word_array)
-		return (NULL);
-	for (i = 0, j = 0; j < num_words; j++)
-	{
-		while (is_delim(input_str[i], delim_str))
+		while (is_delim(str[i], d))
 			i++;
 		k = 0;
-		while (!is_delim(input_str[i + k], delim_str) && input_str[i + k])
+		while (!is_delim(str[i + k], d) && str[i + k])
 			k++;
-		word_array[j] = malloc((k + 1) * sizeof(char));
-		if (!word_array[j])
+		s[j] = malloc((k + 1) * sizeof(char));
+		if (!s[j])
 		{
 			for (k = 0; k < j; k++)
-				free(word_array[k]);
-			free(word_array);
+				free(s[k]);
+			free(s);
 			return (NULL);
 		}
 		for (m = 0; m < k; m++)
-			word_array[j][m] = input_str[i++];
-		word_array[j][m] = 0;
+			s[j][m] = str[i++];
+		s[j][m] = 0;
 	}
-	word_array[j] = (NULL);
-	return (word_array);
+	s[j] = NULL;
+	return (s);
 }
 
 /**
