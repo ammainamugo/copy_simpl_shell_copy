@@ -204,14 +204,14 @@ typedef struct infopas
 		0, 0, 0}
 
 /**
- * struct builtin - contains a builtin string and related function
+ * struct info_built - contains a builtin string and related function
  * @type: the builtin command flag
  * @func: the function
  */
-typedef struct builtin
+typedef struct info_built
 {
 	char *type;
 	int (*func)(type_info *);
-} builtin_table;
+} info_builtin;
 
 #endif
