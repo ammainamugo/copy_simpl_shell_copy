@@ -12,13 +12,13 @@ char *hist_file(type_info *inf)
 	d = _getenv(inf, "HOME=");
 	if (!d)
 		return (NULL);
-	buff = malloc(sizeof(char) * (stlen(d) + stlen(HIST_FILE) + 2));
+	buff = malloc(sizeof(char) * (stlen(d) + stlen(FILE_HIST) + 2));
 	if (!buff)
 		return (NULL);
 	buff[0] = 0;
 	stcopy(buff, d);
 	stccat(buff, "/");
-	stccat(buff, HIST_FILE);
+	stccat(buff, FILE_HIST);
 	return (buff);
 }
 
@@ -29,16 +29,16 @@ char *hist_file(type_info *inf)
  */
 int hist_read(type_info *inf)
 {
-	int i, last = 0, lcount = 0;
+	int a, last = 0, lcount = 0;
 	ttype_size fd, rdlen, fsize = 0;
 	struct stat s;
-	char *buff = NULL, *fname = hist_file(inf);
+	char *buff = NULL, *f_name = hist_file(inf);
 
-	if (!fname)
+	if (!f_name)
 		return (0);
 
-	fd = open(fname, O_RDONLY);
-	free(fname);
+	fd = open(f_name, O_RDONLY);
+	free(f_name);
 	if (fd == -1)
 		return (0);
 	if (!fstat(fd, &s))
@@ -53,19 +53,19 @@ int hist_read(type_info *inf)
 	if (rdlen <= 0)
 		return (free(buff), 0);
 	close(fd);
-	for (i = 0; i < fsize; i++)
-		if (buff[i] == '\n')
+	for (a = 0; a < fsize; a++)
+		if (buff[a] == '\n')
 		{
-			buff[i] = 0;
-			history_build(info, buff + last, lcount++);
-			last = i + 1;
+			buff[a] = 0;
+			history_build(inf, buff + last, lcount++);
+			last = a + 1;
 		}
-	if (last != i)
+	if (last != a)
 		history_build(inf, buff + last, lcount++);
 	free(buff);
 	info->count = lcount;
-	while (inf->count-- >= HIST_MAX)
-		delete_node_at_index(&(inf->history), 0);
+	while (inf->count-- >= MAX_HIST)
+		node_delete(&(inf->nhistory), 0);
 	hist_renum(inf);
 	return (inf->count);
 }
@@ -78,19 +78,19 @@ int hist_read(type_info *inf)
 int hist_write(type_info *inf)
 {
 	ttype_size fd;
-	char *fname = hist_file(inf);
+	char *f_name = hist_file(inf);
 	type_list *node = NULL;
 
-	if (!fname)
+	if (!f_name)
 		return (-1);
 
-	fd = open(fname, O_CREAT | O_TRUNC | O_RDWR, 0644);
-	free(fname);
+	fd = open(f_name, O_CREAT | O_TRUNC | O_RDWR, 0644);
+	free(f_name);
 	if (fd == -1)
 		return (-1);
-	for (node = inf->history; node; node = node->next)
+	for (node = inf->nhistory; node; node = node->next)
 	{
-		pfd_string(node->str, fd);
+		pfd_string(node->s, fd);
 		wri_fd('\n', fd);
 	}
 	wri_fd(BUFF_FLUSH, fd);
@@ -105,15 +105,15 @@ int hist_write(type_info *inf)
  */
 int hist_renum(type_info *inf)
 {
-	type_list *node = inf->history;
+	type_list *node = inf->nhistory;
 	int a = 0;
 
 	while (node)
 	{
-		node->num = a++;
+		node->n = a++;
 		node = node->next;
 	}
-	return (info->hcount = a);
+	return (inf->count = a);
 }
 
 /**
@@ -127,11 +127,11 @@ int history_build(type_info *inf, char *buff, int lcount)
 {
 	type_list *node = NULL;
 
-	if (inf->history)
-		node = inf->history;
-	add_node_end(&node, buff, lcount);
+	if (inf->nhistory)
+		node = inf->nhistory;
+	nodeadd_end(&node, buff, lcount);
 
-	if (!inf->history)
-		inf->history = node;
+	if (!inf->nhistory)
+		inf->nhistory = node;
 	return (0);
 }

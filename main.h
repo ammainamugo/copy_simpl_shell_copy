@@ -100,6 +100,8 @@ void block_ctc(__attribute__((unused))int num);
 void startinfo(type_info *info);
 void initinfo(type_info *inf, char **av);
 void resetinfo(type_info *inf, int f);
+
+/* History functions */
 char *hist_file(type_info *inf);
 int hist_write(type_info *inf);
 int hist_read(type_info *inf);
@@ -140,8 +142,8 @@ ttype_size node_index(type_list *h, type_list *n);
 #define USE_GETLINE 0
 #define USE_STRTOK 0
 
-#define HIST_FILE	".simple_shell_history"
-#define HIST_MAX	4096
+#define FILE_HIST	".simple_shell_history"
+#define MAX_HIST	4096
 
 extern char **envi;
 
@@ -185,7 +187,7 @@ typedef struct infopas
 	char **argv;
 	char *path;
 	int argc;
-	unsigned int counterr;
+	unsigned int lcount;
 	int num_err;
 	int count_flag;
 	char *f_name;
@@ -199,7 +201,7 @@ typedef struct infopas
 	char **bf_cmd;
 	int bf_cmdtype;
 	int readfd;
-	int cnt_hist;
+	int count;
 } type_info;
 
 #define INFO_INIT \
