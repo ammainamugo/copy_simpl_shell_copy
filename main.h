@@ -170,7 +170,7 @@ typedef struct stlist
  * @argv:an array of strings generated from arg
  * @path: a string path for the current command
  * @argc: the argument count
- * @counterr: the error count
+ * @lcount: the error count
  * @num_err: error code for exit()s
  * @count_flag: if on count this line of input
  * @f_name: the program filename
@@ -183,7 +183,7 @@ typedef struct stlist
  * @bf_cmd: address of pointer to bf_cmd
  * @bf_cmdtype: CMD_type ||, &&, ;
  * @readfd: the fd from which to read line input
- * @cnt_hist: history line number count
+ * @count: history line number count
  */
 typedef struct infopas
 {
