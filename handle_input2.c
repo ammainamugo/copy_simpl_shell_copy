@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * _itoa - convert an integer to a string
+ * num_convert - convert an integer to a string
  * @nu: number
  * @ba: base
  * @fl: argument flags
  * Return: string
  */
-char *_itoa(long int nu, int ba, int fl)
+char *num_convert(long int nu, int ba, int fl)
 {
 	static char *ar;
 	static char buf[50];

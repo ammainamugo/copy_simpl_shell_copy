@@ -7,14 +7,14 @@
  */
 void p_string(char *s)
 {
-	int i = 0;
+	int a = 0;
 
 	if (!s)
 		return;
-	while (s[i] != '\0')
+	while (s[a] != '\0')
 	{
-		pr_error(s[i]);
-		i++;
+		pr_error(s[a]);
+		a++;
 	}
 }
 
@@ -26,15 +26,15 @@ void p_string(char *s)
  */
 int pfd_string(char *s, int fd)
 {
-	int i = 0;
+	int a = 0;
 
 	if (!s)
 		return (0);
 	while (*s)
 	{
-		i += wri_fd(*s++, fd);
+		a += wri_fd(*s++, fd);
 	}
-	return (i);
+	return (a);
 }
 
 /**
@@ -46,8 +46,8 @@ int pfd_string(char *s, int fd)
 int handle_d(int in, int fd)
 {
 	int (*_print_out)(char) = print_out;
-	int count, i = 0;
-	unsigned int _abs_, num;
+	int count, a = 0;
+	unsigned int _abs_, n;
 
 	if (fd == STDERR_FILENO)
 		_print_out = pr_error;
@@ -60,17 +60,17 @@ int handle_d(int in, int fd)
 	}
 	else
 		_abs_ = in;
-	num = _abs_;
-	for (i = 1000000000; i > 1; i /= 10)
+	n = _abs_;
+	for (a = 1000000000; a > 1; a /= 10)
 	{
-		if (_abs_ / i)
+		if (_abs_ / a)
 		{
-			_print_out('0' + num / i);
+			_print_out('0' + num / a);
 			count++;
 		}
-		num %= i;
+		num %= a;
 	}
-	_print_out('0' + num);
+	_print_out('0' + n);
 	count++;
 
 	return (count);
